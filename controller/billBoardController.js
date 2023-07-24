@@ -4,18 +4,27 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 const Billboard = require("../collections/billboard");
+const User = require("../collections/user");
 
 const createBillboard = async (req, res) => {
   try {
-    const { location, size, perDayRate, status, image } = req.body;
-    const billboard = await Billboard.create({
-      location,
-      size,
-      perDayRate,
-      status,
-      image,
-    });
-    res.send(billboard);
+    const { location, size, perDayRate, status, image, userId } = req.body;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User not found."); // Handle case when the user does not exist
+    }
+    if (user) {
+      const billboard = await Billboard.create({
+        location,
+        size,
+        perDayRate,
+        status,
+        image,
+        user: user.id,
+      });
+      res.send(billboard);
+    }
   } catch (e) {
     res.status(500).send(e);
   }
