@@ -30,6 +30,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
+    console.log({ user });
     if (!user)
       return res
         .status(400)
@@ -39,10 +40,15 @@ const login = async (req, res) => {
       return res
         .status(400)
         .send({ success: false, message: "Invalid password." });
-    if (user) {
+    if (user.status === "Approved") {
       let jwtSecretKey = "limt";
-      const token = jwt.sign(user.name, jwtSecretKey);
+      const token = jwt.sign(
+        { id: user.id, name: user.name, role: user.role },
+        jwtSecretKey
+      );
       return res.status(200).send(token);
+    } else {
+      return res.status(401).send("User not aproved.");
     }
   } catch (e) {
     res.send(e);

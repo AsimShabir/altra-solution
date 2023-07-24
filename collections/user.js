@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: UserStatus,
-    default: UserStatus.DisApproved,
+    default: UserStatus.Approved,
   },
   role: {
     type: String,
