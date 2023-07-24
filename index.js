@@ -4,8 +4,11 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
+const RouteIndex = require("./routes/index");
+const midleware = require("./midleware/auth");
 const user = require("./controller/userController");
-const billboard = require("./controller/billBoardController");
+app.use("/api", midleware.auth, RouteIndex);
+app.post("/login", user.login);
 
 mongoose
   .connect("mongodb://localhost:27017/altra-solution", {
@@ -14,12 +17,6 @@ mongoose
   })
   .then(() => console.log("Connection successfully"))
   .catch((err) => console.log(err));
-
-app.post("/createuser", user.createUser);
-app.post("/login", user.login);
-app.get("/getallusers", user.getAllUsers);
-app.post("/createbillboard", billboard.createBillboard);
-app.get("/getallbillboard", billboard.getAllBillboards);
 
 app.listen(4000, () => {
   console.log("server is runing on port 4000");

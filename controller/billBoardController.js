@@ -12,7 +12,9 @@ const createBillboard = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      throw new Error("User not found."); // Handle case when the user does not exist
+      return res
+        .status(404)
+        .send({ success: false, message: "User not found." });
     }
     if (user) {
       const billboard = await Billboard.create({
