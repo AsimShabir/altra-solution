@@ -9,6 +9,7 @@ const midleware = require("./midleware/auth");
 const user = require("./controller/userController");
 app.use("/api", midleware.auth, RouteIndex);
 app.post("/login", user.login);
+app.post("/createuser", user.createUser);
 
 mongoose
   .connect("mongodb://localhost:27017/altra-solution", {

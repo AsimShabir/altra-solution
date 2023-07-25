@@ -4,7 +4,6 @@ const user = require("../controller/userController");
 const billboard = require("../controller/billBoardController");
 
 router
-  .post("/createuser", user.createUser)
   .get("/getallusers", user.getAllUsers)
   .post("/createbillboard", billboard.createBillboard)
   .get("/getallbillboard", billboard.getAllBillboards);
