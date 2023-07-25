@@ -12,7 +12,6 @@ const auth = async (req, res, next) => {
       return res.status(401).send("Access denied. No token provided.");
     }
     const decode = jwt.verify(token, "limt");
-    console.log({ decode });
     if (!decode) {
       return res.status(401).send("Access denied. Invalid token.");
     }
