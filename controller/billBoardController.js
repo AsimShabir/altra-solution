@@ -39,11 +39,15 @@ const createBillboard = async (req, res) => {
 
 const getAllBillboards = async (req, res) => {
   try {
-    Billboard.find({}).then((result) => {
-      res.status(200).send(result);
-    });
+    const { location } = req.body;
+    let query = {};
+    if (location) {
+      query = { location: location };
+    }
+    const billboards = await Billboard.find(query);
+    res.status(200).send(billboards);
   } catch (e) {
-    res.send(e);
+    res.status(500).send(e);
   }
 };
 
