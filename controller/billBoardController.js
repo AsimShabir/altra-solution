@@ -5,7 +5,12 @@ app.use(cors());
 app.use(express.json());
 const Billboard = require("../collections/billboard");
 const User = require("../collections/user");
+const Reservatiin = require("../collections/reservation");
 
+const BillboardStatus = {
+  Available: "Available",
+  Booked: "Booked",
+};
 const createBillboard = async (req, res) => {
   try {
     const { location, size, perDayRate, status, userId } = req.body;
