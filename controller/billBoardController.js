@@ -13,7 +13,7 @@ const BillboardStatus = {
 };
 const createBillboard = async (req, res) => {
   try {
-    const { location, size, perDayRate, status, image, userId } = req.body;
+    const { location, size, perDayRate, status, userId } = req.body;
     const user = await User.findById(userId);
 
     if (!user) {
@@ -27,7 +27,7 @@ const createBillboard = async (req, res) => {
         size,
         perDayRate,
         status,
-        image,
+        image: req.imagePath,
         user: user.id,
       });
       res.send(billboard);
