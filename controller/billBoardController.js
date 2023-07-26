@@ -42,7 +42,7 @@ const getAllBillboards = async (req, res) => {
     const { location } = req.body;
     let query = {};
     if (location) {
-      query = { location: location };
+      query = { location: { $regex: location, $options: "i" } };
     }
     const billboards = await Billboard.find(query);
     res.status(200).send(billboards);
