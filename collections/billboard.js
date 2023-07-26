@@ -14,10 +14,7 @@ const billboardSchema = new mongoose.Schema({
     enum: BillboardStatus,
     default: BillboardStatus.Available,
   },
-  image: {
-    data: Buffer, // Buffer to store the image data
-    contentType: String, // MIME type of the image
-  },
+  image: { type: String },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
