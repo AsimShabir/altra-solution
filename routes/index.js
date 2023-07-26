@@ -8,8 +8,10 @@ const reservation = require("../controller/reservationController");
 
 router
   .get("/getallusers", user.getAllUsers)
+  .delete("/removeuser", user.removeUser)
+  .put("/updateuser", user.updateUser)
   .post("/createbillboard", midleware.storeImage, billboard.createBillboard)
   .get("/getallbillboard", billboard.getAllBillboards)
-  .post("/reservation", reservation.reservation);
-
+  .post("/reservation", reservation.reservation)
+  .get("/getallreservation", reservation.getAllReservationsWithUser);
 module.exports = router;
