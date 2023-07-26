@@ -10,5 +10,6 @@ router
   .put("/updateuser", user.updateUser)
   .post("/createbillboard", billboard.createBillboard)
   .get("/getallbillboard", billboard.getAllBillboards)
-  .post("/reservation", reservation.reservation);
+  .post("/reservation", reservation.reservation)
+  .get("/getallreservation", reservation.getAllReservationsWithUser);
 module.exports = router;

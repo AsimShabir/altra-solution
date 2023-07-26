@@ -54,6 +54,19 @@ const reservation = async (req, res) => {
   }
 };
 
+const getAllReservationsWithUser = async (req, res) => {
+  try {
+    const reservations = await Reservatiin.find({})
+      .populate("user")
+      .populate("billBoard");
+
+    res.status(200).send(reservations);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   reservation,
+  getAllReservationsWithUser,
 };
