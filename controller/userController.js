@@ -64,9 +64,29 @@ const getAllUsers = async (req, res) => {
     res.send(e);
   }
 };
+const removeUser = async (req, res) => {
+  const { id } = req.body;
+  User.deleteOne({ _id: id }).then((error, result) => {
+    res.send("User deleted");
+  });
+};
+
+const updateUser = async (req, res) => {
+  const { id, name, password, phone, email, status, role } = req.body;
+  const salt = await bcrypt.genSalt();
+  const hashPassword = await bcrypt.hash(password, salt);
+  User.updateOne(
+    { _id: id },
+    { name, password: hashPassword, phone, email, status, role }
+  ).then((error, result) => {
+    res.send("User Updated");
+  });
+};
 
 module.exports = {
   createUser,
   login,
   getAllUsers,
+  removeUser,
+  updateUser,
 };

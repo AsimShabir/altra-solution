@@ -6,6 +6,8 @@ const reservation = require("../controller/reservationController");
 
 router
   .get("/getallusers", user.getAllUsers)
+  .delete("/removeuser", user.removeUser)
+  .put("/updateuser", user.updateUser)
   .post("/createbillboard", billboard.createBillboard)
   .get("/getallbillboard", billboard.getAllBillboards)
   .post("/reservation", reservation.reservation);
