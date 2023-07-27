@@ -6,6 +6,8 @@ const BillboardStatus = {
 };
 
 const billboardSchema = new mongoose.Schema({
+  name: String,
+  description: String,
   location: String,
   size: String,
   perDayRate: Number,
