@@ -50,8 +50,24 @@ const getAllBillboards = async (req, res) => {
     res.status(500).send(e);
   }
 };
+const getAllPublicBillboards = async (req, res) => {
+  try {
+    const { location } = req.body;
+    let query = { status: "Available" }; // Initialize the query object with status "Available"
+
+    if (location) {
+      query.location = { $regex: location, $options: "i" };
+    }
+
+    const billboards = await Billboard.find(query);
+    res.status(200).send(billboards);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+};
 
 module.exports = {
   createBillboard,
   getAllBillboards,
+  getAllPublicBillboards,
 };

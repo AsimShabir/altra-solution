@@ -7,6 +7,7 @@ app.use(express.json());
 const RouteIndex = require("./routes/index");
 const midleware = require("./midleware/auth");
 const user = require("./controller/userController");
+const billboard = require("./controller/billBoardController");
 const path = require("path");
 
 app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
@@ -14,6 +15,7 @@ app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
 app.use("/api", midleware.auth, RouteIndex);
 app.post("/login", user.login);
 app.post("/createuser", user.createUser);
+app.get("/getallpublicbillboard", billboard.getAllPublicBillboards);
 
 mongoose
   .connect("mongodb://localhost:27017/altra-solution", {
