@@ -43,7 +43,7 @@ const login = async (req, res) => {
     if (user.status === "Approved") {
       let jwtSecretKey = "limt";
       const token = jwt.sign(
-        { id: user.id, name: user.name, role: user.role },
+        { id: user.id, name: user.name, email: user.email, role: user.role },
         jwtSecretKey
       );
       return res.status(200).send(token);
@@ -72,11 +72,11 @@ const removeUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { id, name, password, phone, email, status, role } = req.body;
+  const { _id, name, password, phone, email, status, role } = req.body;
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   User.updateOne(
-    { _id: id },
+    { _id },
     { name, password: hashPassword, phone, email, status, role }
   ).then((error, result) => {
     res.send("User Updated");

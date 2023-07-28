@@ -58,7 +58,13 @@ const getAllReservationsWithUser = async (req, res) => {
   try {
     const reservations = await Reservatiin.find({})
       .populate("user")
-      .populate("billBoard");
+      .populate({
+        path: "billBoard",
+        populate: {
+          path: "user",
+          model: "User",
+        },
+      });
 
     res.status(200).send(reservations);
   } catch (error) {

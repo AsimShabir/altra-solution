@@ -11,7 +11,8 @@ router
   .delete("/removeuser", user.removeUser)
   .put("/updateuser", user.updateUser)
   .post("/createbillboard", midleware.storeImage, billboard.createBillboard)
-  .get("/getallbillboard", billboard.getAllBillboards)
+  .post("/getallbillboard", billboard.getAllBillboards)
+  .put("/updatebillboard", midleware.storeImage, billboard.updateBillboard)
   .post("/reservation", reservation.reservation)
   .get("/getallreservation", reservation.getAllReservationsWithUser);
 module.exports = router;
