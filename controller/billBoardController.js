@@ -52,7 +52,7 @@ const getAllBillboards = async (req, res) => {
 const getAllPublicBillboards = async (req, res) => {
   try {
     const { location } = req.body;
-    let query = { status: "Available" }; // Initialize the query object with status "Available"
+    let query = {}; // Initialize the query object with status "Available"
 
     if (location) {
       query.location = { $regex: location, $options: "i" };

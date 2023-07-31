@@ -13,7 +13,8 @@ const BillboardStatus = {
 };
 const reservation = async (req, res) => {
   try {
-    const { startDate, endDate, rate, userId, billboardId } = req.body;
+    const { startDate, endDate, rate, userId, billboardId, trackingId } =
+      req.body;
     const user = await User.findById(userId);
     const billBoard = await Billboard.findById(billboardId);
 
@@ -41,6 +42,7 @@ const reservation = async (req, res) => {
         rate: totalRate,
         billBoard: billBoard.id,
         user: user.id,
+        trackingId: trackingId,
       });
       await Billboard.updateOne(
         { _id: billBoard.id },
